@@ -139,6 +139,7 @@ npm install -g eslint
   },
 }
   ```
+
 # What to Install
 
 ## 1. PHP
@@ -366,3 +367,42 @@ to create a new Controller
   import {Link} from '@inertiajs/vue3'
   ```
   and then use `<Link :href="/">Main Page</Link>` in the template
+
+# Database
+
+to setup a Mysql-database Entity in Docker 
+
+1. create a `docker-compose.yml` file
+2. put this inside it
+```yml
+version: "3.9"
+services:
+  mysql:
+    image: mariadb:10.8.3
+    # Uncomment below when on Mac M1
+    # platform: linux/arm64/v8
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3307:3307
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8081
+  ```
+
+3- run `docker compose up` in the root of your project. If you have an other docker running and you want to use the same entity for your project just skip this step.
+
+4- check your .env configuration and see if the password is root and define your DB-name
+
+5- open the adminer (localhost:8080) and login with `mysql` `root` `root`
+
+6- make a database with the name you defined in `.env` as a `utf8mb4_general_ci`
+
+7- to know your Database configuration is ok run: 
+```bash
+php artisan db:show
+```
