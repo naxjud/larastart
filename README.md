@@ -162,6 +162,24 @@ npm install -g eslint
 2. install and restart
 3. if asked to install WSL 2 do that
 
+## 5. Laravel Debugbar [doc](https://github.com/barryvdh/laravel-debugbar)
+1. run `composer require barryvdh/laravel-debugbar --dev` 
+
+## 6. Laravel IDE-Helper [doc](https://github.com/barryvdh/laravel-ide-helper)
+1. run `composer require --dev barryvdh/laravel-ide-helper`
+2. run `php artisan ide-helper:generate`
+3. put this in your `composer.json`
+  ```javascript
+  "scripts": {
+    "post-update-cmd": [
+        "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+        "@php artisan ide-helper:generate",
+        "@php artisan ide-helper:meta"
+    ]
+  },
+```
+
+
 # Start a Project
 ## create a new laravel project
 - create a new laravel project
